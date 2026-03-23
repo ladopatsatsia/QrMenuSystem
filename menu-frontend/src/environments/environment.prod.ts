@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://qrmenu-backend.onrender.com/api',
-  baseUrl: 'https://qrmenu-backend.onrender.com'
+  apiUrl: 'https://qrmenu-api-l29d.onrender.com/api',
+  baseUrl: 'https://qrmenu-api-l29d.onrender.com'
 };

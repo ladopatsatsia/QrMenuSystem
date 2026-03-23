@@ -122,8 +122,8 @@ using (var scope = app.Services.CreateScope())
     {
         if (context.Database.ProviderName == "Npgsql.EntityFrameworkCore.PostgreSQL")
         {
-            // For Postgres (Render), ensure created is safest for initial demo
-            // We use EnsureCreated to bypass incompatible migrations
+            // For Postgres (Render), EnsureCreated only works if the DB is totally empty.
+            // If it fails or does nothing, we try to apply migrations.
             await context.Database.EnsureCreatedAsync();
         }
         else
