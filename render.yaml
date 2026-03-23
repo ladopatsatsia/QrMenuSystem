@@ -1,0 +1,28 @@
+services:
+  # Backend API
+  - type: web
+    name: qrmenu-api
+    runtime: docker
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: qrmenu-db
+          property: connectionString
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+    plan: free
+
+  # Frontend (Admin + Public)
+  - type: web
+    name: qrmenu-frontend
+    runtime: static
+    buildCommand: "cd frontend && npm install && npm run build"
+    publishPath: "frontend/dist/frontend/browser"
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+    plan: free
+
+databases:
+  - name: qrmenu-db
+    plan: free
