@@ -111,9 +111,9 @@ import { CdkDragDrop, moveItemInArray, DragDropModule } from '@angular/cdk/drag-
                   </div>
                   <div class="row">
                     <div class="col-6 mb-4">
-                      <label class="form-label fw-bold small text-uppercase text-muted">{{ translate('MENU_ITEM_PRICE_LABEL') }} ($)</label>
+                      <label class="form-label fw-bold small text-uppercase text-muted">{{ translate('MENU_ITEM_PRICE_LABEL') }} (₾)</label>
                       <div class="input-group">
-                        <span class="input-group-text rounded-start-3 border-2 bg-light border-end-0">$</span>
+                        <span class="input-group-text rounded-start-3 border-2 bg-light border-end-0">₾</span>
                         <input type="number" [(ngModel)]="editingItem.price" class="form-control rounded-end-3 border-2 border-start-0 py-2">
                       </div>
                     </div>
