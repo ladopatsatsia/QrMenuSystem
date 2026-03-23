@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../../core/services/api.service';
+import { ImageService } from '../../../core/services/image.service';
 import { TranslationService } from '../../../core/services/translation.service';
 import { environment } from '../../../../environments/environment';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-object-management',
@@ -73,15 +75,21 @@ import { environment } from '../../../../environments/environment';
               <div class="mb-3 text-center">
                 <div class="d-inline-block position-relative">
                   <div class="rounded-4 overflow-hidden shadow-sm bg-light d-flex align-items-center justify-content-center" style="width: 150px; height: 100px; border: 2px dashed #dee2e6;">
-                    <img *ngIf="editingObject.imageUrl" [src]="getFullUrl(editingObject.imageUrl)" class="w-100 h-100 object-fit-cover">
-                    <i *ngIf="!editingObject.imageUrl" class="bi bi-camera fs-1 text-muted"></i>
+                    <img *ngIf="editingObject.imageUrl && !isUploading" [src]="getFullUrl(editingObject.imageUrl)" class="w-100 h-100 object-fit-cover">
+                    <!-- Loading Spinner -->
+                    <div *ngIf="isUploading" class="p-3">
+                      <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                    <i *ngIf="!editingObject.imageUrl && !isUploading" class="bi bi-camera fs-1 text-muted"></i>
                   </div>
-                  <button type="button" class="btn btn-sm btn-primary position-absolute bottom-0 end-0 rounded-circle shadow" (click)="fileInput.click()" style="width: 32px; height: 32px; padding: 0;">
+                  <button type="button" class="btn btn-sm btn-primary position-absolute bottom-0 end-0 rounded-circle shadow" (click)="fileInput.click()" [disabled]="isUploading" style="width: 32px; height: 32px; padding: 0;">
                     <i class="bi bi-pencil-fill small"></i>
                   </button>
                 </div>
                 <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" class="d-none">
-                <div class="mt-2 text-muted small">{{ translate('VENUE_PHOTO_LABEL') }}</div>
+                <div class="mt-2 text-muted small">{{ isUploading ? 'Uploading...' : translate('VENUE_PHOTO_LABEL') }}</div>
               </div>
 
               <div class="mb-3">
@@ -98,8 +106,8 @@ import { environment } from '../../../../environments/environment';
               </div>
             </div>
             <div class="modal-footer border-0">
-              <button type="button" class="btn btn-light rounded-pill px-4" (click)="closeModal()">{{ translate('BUTTON_CANCEL') }}</button>
-              <button type="button" class="btn btn-primary rounded-pill px-4" (click)="save()">
+              <button type="button" class="btn btn-light rounded-pill px-4" (click)="closeModal()" [disabled]="isUploading">{{ translate('BUTTON_CANCEL') }}</button>
+              <button type="button" class="btn btn-primary rounded-pill px-4" (click)="save()" [disabled]="isUploading">
                 {{ editingObject.id ? translate('VENUE_UPDATE_BUTTON') : translate('VENUE_CREATE_BUTTON') }}
               </button>
             </div>
@@ -130,8 +138,9 @@ export class ObjectManagementComponent implements OnInit {
   objects: any[] = [];
   isModalOpen = false;
   editingObject: any = {};
+  isUploading = false;
 
-  constructor(private api: ApiService, private translationService: TranslationService) {}
+  constructor(private api: ApiService, private translationService: TranslationService, private imageService: ImageService) {}
 
   ngOnInit() {
     this.loadObjects();
@@ -151,14 +160,33 @@ export class ObjectManagementComponent implements OnInit {
     this.api.get('/admin/objects').subscribe(res => this.objects = res.resultData.data);
   }
 
-  onFileSelected(event: any) {
+  async onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
-      this.api.post('/admin/upload/image', formData).subscribe(res => {
-        this.editingObject.imageUrl = res.imageUrl;
-      });
+      this.isUploading = true;
+      try {
+        const resizedBlob = await this.imageService.resizeImage(file);
+        const formData = new FormData();
+        formData.append('file', resizedBlob, file.name);
+
+        this.api.post('/admin/upload/image', formData).pipe(
+          timeout(30000)
+        ).subscribe({
+          next: (res: any) => {
+            this.editingObject.imageUrl = res.imageUrl;
+            this.isUploading = false;
+          },
+          error: (err: any) => {
+            console.error('Venue photo upload error', err);
+            this.isUploading = false;
+            alert('Upload failed: ' + (err.message || 'Server error'));
+          }
+        });
+      } catch (err: any) {
+        console.error('Venue photo processing failed', err);
+        this.isUploading = false;
+        alert('Image processing failed: ' + err.message);
+      }
     }
   }
 
