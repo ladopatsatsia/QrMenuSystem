@@ -94,11 +94,12 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI(c => {
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Menu Management API v1");
+    // This allows Swagger to work behind a reverse proxy (like Render)
+    c.RoutePrefix = "swagger";
+});
 
 app.UseMiddleware<ExceptionMiddleware>();
 
@@ -119,8 +120,15 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<MenuManagementDbContext>();
     try
     {
-        // For development, we apply migrations and seed
-        await context.Database.MigrateAsync();
+        if (context.Database.ProviderName == "Npgsql.EntityFrameworkCore.PostgreSQL")
+        {
+            // For Postgres (Render), ensure created is safest for initial demo
+            await context.Database.EnsureCreatedAsync();
+        }
+        else
+        {
+            await context.Database.MigrateAsync();
+        }
         await DatabaseSeeder.SeedAsync(context);
     }
     catch (Exception ex)
