@@ -13,9 +13,8 @@ services:
     plan: free
 
   # Frontend (Admin + Public)
-  - type: web
+  - type: static
     name: qrmenu-frontend
-    runtime: static
     buildCommand: "cd frontend && npm install && npm run build"
     publishPath: "frontend/dist/frontend/browser"
     envVars:
