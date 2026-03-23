@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, HostListener, OnInit, QueryList, 
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ApiService } from '../../../core/services/api.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-object-detail',
@@ -13,7 +14,7 @@ import { ApiService } from '../../../core/services/api.service';
         <div class="hero-cover">
           <img
             class="hero-cover__image"
-            [src]="object.imageUrl ? apiUrl + object.imageUrl : 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80'"
+            [src]="getFullUrl(object.imageUrl)"
             [alt]="object.name">
           <div class="hero-cover__overlay"></div>
         </div>
@@ -63,7 +64,7 @@ import { ApiService } from '../../../core/services/api.service';
             <div class="category-card__background">
               <img
                 *ngIf="menu.imageUrl"
-                [src]="apiUrl + menu.imageUrl"
+                [src]="getFullUrl(menu.imageUrl)"
                 [alt]="menu.name"
                 class="category-card__image">
               <div class="category-card__fallback" *ngIf="!menu.imageUrl"></div>
@@ -80,7 +81,7 @@ import { ApiService } from '../../../core/services/api.service';
           <div class="category-hero">
             <img
               *ngIf="selectedMenu.imageUrl"
-              [src]="apiUrl + selectedMenu.imageUrl"
+              [src]="getFullUrl(selectedMenu.imageUrl)"
               [alt]="selectedMenu.name"
               class="category-hero__image">
             <div class="category-hero__fallback" *ngIf="!selectedMenu.imageUrl"></div>
@@ -104,7 +105,7 @@ import { ApiService } from '../../../core/services/api.service';
                   </div>
                 </div>
                 <div class="menu-item__media" *ngIf="item.imageUrl">
-                  <img [src]="apiUrl + item.imageUrl" class="menu-item__image" [alt]="item.name">
+                  <img [src]="getFullUrl(item.imageUrl)" class="menu-item__image" [alt]="item.name">
                 </div>
               </div>
             </div>
@@ -127,7 +128,7 @@ import { ApiService } from '../../../core/services/api.service';
           </button>
           
           <div class="item-modal__media" *ngIf="selectedItem.imageUrl">
-            <img [src]="apiUrl + selectedItem.imageUrl" [alt]="selectedItem.name">
+            <img [src]="getFullUrl(selectedItem.imageUrl)" [alt]="selectedItem.name">
           </div>
           
           <div class="item-modal__content">
@@ -782,9 +783,15 @@ export class ObjectDetailComponent implements OnInit, AfterViewInit {
   menus: any[] = [];
   selectedMenu: any;
   items: any[] = [];
-  apiUrl = 'http://localhost:5223';
+  apiUrl = environment.baseUrl;
   isTabsElevated = false;
   selectedItem: any = null;
+
+  getFullUrl(url: string | null | undefined): string {
+    if (!url) return 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80';
+    if (url.startsWith('http')) return url;
+    return `${this.apiUrl}${url}`;
+  }
 
   @ViewChild('menuTabsScroller') menuTabsScroller?: ElementRef<HTMLDivElement>;
   @ViewChildren('menuTabButton') menuTabButtons?: QueryList<ElementRef<HTMLButtonElement>>;
