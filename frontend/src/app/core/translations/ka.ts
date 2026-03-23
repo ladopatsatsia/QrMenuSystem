@@ -19,6 +19,13 @@ export const KA = {
   // Dashboard
   'DASHBOARD_TITLE': 'სტატისტიკა',
   'DASHBOARD_WELCOME': 'მოგესალმებით ადმინ პანელში',
+  'DASHBOARD_CHANGE_PASSWORD': 'პაროლის შეცვლა',
+  'PASSWORD_CURRENT': 'მიმდინარე პაროლი',
+  'PASSWORD_NEW': 'ახალი პაროლი',
+  'PASSWORD_CONFIRM': 'გაიმეორეთ ახალი პაროლი',
+  'PASSWORD_CHANGE_SUCCESS': 'პაროლი წარმატებით შეიცვალა',
+  'PASSWORD_CHANGE_ERROR': 'პაროლის შეცვლა ვერ მოხერხდა',
+  'BUTTON_CHANGE_PASSWORD': 'შეცვლა',
 
   // Object Management (Venues)
   'VENUE_TITLE': 'ობიექტების მართვა',

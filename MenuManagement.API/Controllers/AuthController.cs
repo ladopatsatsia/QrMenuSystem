@@ -14,5 +14,13 @@ namespace MenuManagement.API.Controllers
             if (!result.Succeeded) return BadRequest(result);
             return Ok(result);
         }
+
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordCommand command)
+        {
+            var result = await Mediator.Send(command);
+            if (!result.Succeeded) return BadRequest(result);
+            return Ok(result);
+        }
     }
 }

@@ -37,6 +37,11 @@ export class AuthService {
       }));
   }
 
+  changePassword(userId: string, currentPassword: string, newPassword: string): Observable<any> {
+    const data = { userId, currentPassword, newPassword };
+    return this.http.post<any>(`${environment.apiUrl}/auth/change-password`, data);
+  }
+
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);

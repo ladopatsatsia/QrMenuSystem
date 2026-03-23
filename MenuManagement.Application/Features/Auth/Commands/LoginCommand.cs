@@ -39,6 +39,7 @@ namespace MenuManagement.Application.Features.Auth.Commands
 
             return OperationResult<AuthDto>.Success(new AuthDto
             {
+                Id = user.Id,
                 Token = token,
                 Username = user.Username,
                 Role = user.Role
