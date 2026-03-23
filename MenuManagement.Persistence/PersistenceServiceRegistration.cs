@@ -20,7 +20,7 @@ namespace MenuManagement.Persistence
                 }
                 else
                 {
-                    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                         b => b.MigrationsAssembly(typeof(MenuManagementDbContext).Assembly.FullName)
                               .EnableRetryOnFailure());
                 }
