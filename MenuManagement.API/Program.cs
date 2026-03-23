@@ -116,6 +116,7 @@ app.UseAuthorization();
 
 app.UseStaticFiles();
 app.MapControllers();
+app.MapFallbackToFile("index.html");
 
 // Seed Database
 using (var scope = app.Services.CreateScope())
@@ -144,3 +145,4 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+

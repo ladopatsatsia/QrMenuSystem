@@ -15,7 +15,7 @@
    The API will be available at `https://localhost:7085` (or check your console output).
 
 ## Frontend Setup (Angular)
-1. Navigate to `menu-frontend`.
+1. Navigate to `frontend`.
 2. Install dependencies:
    ```bash
    npm install
