@@ -117,6 +117,9 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<MenuManagementDbContext>();
+    try
+    {
         if (context.Database.ProviderName == "Npgsql.EntityFrameworkCore.PostgreSQL")
         {
             // For Postgres (Render), ensure created is safest for initial demo
@@ -128,6 +131,7 @@ using (var scope = app.Services.CreateScope())
             await context.Database.MigrateAsync();
         }
         await DatabaseSeeder.SeedAsync(context);
+    }
     catch (Exception ex)
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
