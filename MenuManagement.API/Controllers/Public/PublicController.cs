@@ -1,0 +1,38 @@
+using MenuManagement.Application.Features.MenuItems.Queries;
+using MenuManagement.Application.Features.Menus.Queries;
+using MenuManagement.Domain;
+using MenuManagement.Application.Features.Objects.Queries;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
+
+namespace MenuManagement.API.Controllers.Public
+{
+    [Route("api/public")]
+    public class PublicController : ApiControllerBase
+    {
+        [HttpGet("objects")]
+        public async Task<IActionResult> GetObjects([FromQuery] GetObjectsPagedQuery query)
+        {
+            return Ok(await Mediator.Send(query));
+        }
+
+        [HttpGet("objects/{id}")]
+        public async Task<IActionResult> GetObjectById(Guid id)
+        {
+            return Ok(await Mediator.Send(new GetObjectByIdQuery { Id = id }));
+        }
+
+        [HttpGet("objects/{objectId}/menus")]
+        public async Task<IActionResult> GetMenusByObjectId(Guid objectId)
+        {
+            return Ok(await Mediator.Send(new GetMenusByObjectIdQuery { ObjectId = objectId }));
+        }
+
+        [HttpGet("menus/{menuId}/items")]
+        public async Task<IActionResult> GetItemsByMenuId(Guid menuId)
+        {
+            return Ok(await Mediator.Send(new GetMenuItemsByMenuIdQuery { MenuId = menuId }));
+        }
+    }
+}

@@ -1,0 +1,84 @@
+.app-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+ 
+.sidebar {
+  width: 280px;
+  background: #212529;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  position: fixed;
+  height: 100vh;
+}
+ 
+.content {
+  flex: 1;
+  margin-left: 280px;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+ 
+.no-sidebar {
+  flex: 1;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+ 
+.sidebar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0d6efd;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+ 
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+ 
+.sidebar nav a {
+  color: #adb5bd;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+ 
+.sidebar nav a:hover {
+  background: #343a40;
+  color: white;
+}
+ 
+.sidebar nav a.active {
+  background: #0d6efd;
+  color: white;
+}
+ 
+.sidebar nav a.exact-active {
+  background: #0d6efd;
+  color: white;
+}
+ 
+.user-box {
+  border-top: 1px solid #343a40;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+ 
+.user-box span {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+}
+ 
+.user-box button {
+  width: 100%;
+}

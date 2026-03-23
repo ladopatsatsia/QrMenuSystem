@@ -1,0 +1,15 @@
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\obj\Debug\net8.0\MenuManagement.Application.csproj.AssemblyReference.cache
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\obj\Debug\net8.0\MenuManagement.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\obj\Debug\net8.0\MenuManagement.Application.AssemblyInfoInputs.cache
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\obj\Debug\net8.0\MenuManagement.Application.AssemblyInfo.cs
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\obj\Debug\net8.0\MenuManagement.Application.csproj.CoreCompileInputs.cache
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\bin\Debug\net8.0\MenuManagement.Application.deps.json
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\bin\Debug\net8.0\MenuManagement.Application.dll
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\bin\Debug\net8.0\MenuManagement.Application.pdb
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\bin\Debug\net8.0\MenuManagement.Domain.dll
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\bin\Debug\net8.0\MenuManagement.Domain.pdb
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\obj\Debug\net8.0\MenuMana.52F98137.Up2Date
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\obj\Debug\net8.0\MenuManagement.Application.dll
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\obj\Debug\net8.0\refint\MenuManagement.Application.dll
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\obj\Debug\net8.0\MenuManagement.Application.pdb
+C:\Users\ladop\QrMenuSystem\MenuManagement.Application\obj\Debug\net8.0\ref\MenuManagement.Application.dll

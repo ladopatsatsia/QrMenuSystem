@@ -1,0 +1,16 @@
+using System;
+
+namespace MenuManagement.Application.Features.Objects.DTOs
+{
+    public class ObjectDto
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? Address { get; set; }
+        public string? Phone { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime CreatedAt { get; set; }
+    }
+}

@@ -1,0 +1,17 @@
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\obj\Debug\net8.0\MenuManagement.Persistence.csproj.AssemblyReference.cache
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\obj\Debug\net8.0\MenuManagement.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\obj\Debug\net8.0\MenuManagement.Persistence.AssemblyInfoInputs.cache
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\obj\Debug\net8.0\MenuManagement.Persistence.AssemblyInfo.cs
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\obj\Debug\net8.0\MenuManagement.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\bin\Debug\net8.0\MenuManagement.Persistence.deps.json
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\bin\Debug\net8.0\MenuManagement.Persistence.dll
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\bin\Debug\net8.0\MenuManagement.Persistence.pdb
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\bin\Debug\net8.0\MenuManagement.Application.dll
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\bin\Debug\net8.0\MenuManagement.Domain.dll
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\bin\Debug\net8.0\MenuManagement.Application.pdb
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\bin\Debug\net8.0\MenuManagement.Domain.pdb
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\obj\Debug\net8.0\MenuMana.6191C5D5.Up2Date
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\obj\Debug\net8.0\MenuManagement.Persistence.dll
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\obj\Debug\net8.0\refint\MenuManagement.Persistence.dll
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\obj\Debug\net8.0\MenuManagement.Persistence.pdb
+C:\Users\ladop\QrMenuSystem\MenuManagement.Persistence\obj\Debug\net8.0\ref\MenuManagement.Persistence.dll

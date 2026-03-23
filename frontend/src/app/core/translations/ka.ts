@@ -1,0 +1,56 @@
+export const KA = {
+  // Sidebar & Common
+  'SIDEBAR_DASHBOARD': 'მთავარი გვერდი',
+  'SIDEBAR_MANAGE_VENUES': 'ვენიუების მართვა',
+  'SIDEBAR_LOGGED_IN_AS': 'შესული ხართ როგორც',
+  'BUTTON_LOGOUT': 'გამოსვლა',
+  'BUTTON_SAVE': 'შენახვა',
+  'BUTTON_CANCEL': 'გაუქმება',
+  'BUTTON_EDIT': 'რედაქტირება',
+  'BUTTON_DELETE': 'წაშლა',
+  'BUTTON_MENUS': 'მენიუები',
+  'CONFIRM_DELETE': 'დარწმუნებული ხართ?',
+
+  // Dashboard
+  'DASHBOARD_TITLE': 'სტატისტიკა',
+  'DASHBOARD_WELCOME': 'მოგესალმებით ადმინ პანელში',
+
+  // Object Management (Venues)
+  'VENUE_TITLE': 'ობიექტების მართვა',
+  'VENUE_ADD_BUTTON': 'ობიექტის დამატება',
+  'VENUE_NAME_LABEL': 'ობიექტის დასახელება',
+  'VENUE_ADDRESS_LABEL': 'მისამართი',
+  'VENUE_DESCRIPTION_LABEL': 'აღწერა',
+  'VENUE_PHOTO_LABEL': 'ფოტო',
+  'VENUE_STATUS_ACTIVE': 'აქტიური',
+  'VENUE_STATUS_INACTIVE': 'არაქტიური',
+  'VENUE_MODAL_CREATE': 'ახალი ვენიუს შექმნა',
+  'VENUE_MODAL_EDIT': 'ვენიუს რედაქტირება',
+  'VENUE_CHANGE_PHOTO': 'ფოტოს შეცვლა',
+  'VENUE_UPDATE_BUTTON': 'განახლება',
+  'VENUE_CREATE_BUTTON': 'შექმნა',
+  'VENUE_EMPTY_STATE': 'ვენიუები არ მოიძებნა.',
+  'VENUE_CREATE_FIRST': 'შექმენით თქვენი პირველი ვენიუ',
+
+  // Menu Management
+  'MENU_TITLE': 'მენიუების მართვა',
+  'MENU_ADD_BUTTON': 'მენიუს დამატება',
+  'MENU_NAME_LABEL': 'მენიუს დასახელება',
+  'MENU_UPDATE_BUTTON': 'განახლება',
+  'MENU_CREATE_BUTTON': 'შექმნა',
+
+  // Menu Item Management
+  'MENU_ITEM_TITLE': 'კერძების და ფასების მართვა',
+  'MENU_ITEM_ADD_BUTTON': 'კერძის დამატება',
+  'MENU_ITEM_NAME_LABEL': 'კერძის დასახელება',
+  'MENU_ITEM_PRICE_LABEL': 'ფასი',
+  'MENU_ITEM_DESCRIPTION_LABEL': 'აღწერა',
+  'MENU_ITEM_UPDATE_BUTTON': 'განახლება',
+  'MENU_ITEM_CREATE_BUTTON': 'შექმნა',
+
+  // Auth
+  'LOGIN_TITLE': 'შესვლა',
+  'LOGIN_USERNAME': 'მომხმარებელი',
+  'LOGIN_PASSWORD': 'პაროლი',
+  'LOGIN_BUTTON': 'შესვლა'
+};
