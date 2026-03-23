@@ -1,7 +1,7 @@
 export const KA = {
   // Sidebar & Common
   'SIDEBAR_DASHBOARD': 'მთავარი გვერდი',
-  'SIDEBAR_MANAGE_VENUES': 'ვენიუების მართვა',
+  'SIDEBAR_MANAGE_VENUES': 'მენიუების მართვა',
   'SIDEBAR_LOGGED_IN_AS': 'შესული ხართ როგორც',
   'BUTTON_LOGOUT': 'გამოსვლა',
   'BUTTON_SAVE': 'შენახვა',
@@ -24,17 +24,17 @@ export const KA = {
   'VENUE_PHOTO_LABEL': 'ფოტო',
   'VENUE_STATUS_ACTIVE': 'აქტიური',
   'VENUE_STATUS_INACTIVE': 'არაქტიური',
-  'VENUE_MODAL_CREATE': 'ახალი ვენიუს შექმნა',
-  'VENUE_MODAL_EDIT': 'ვენიუს რედაქტირება',
+  'VENUE_MODAL_CREATE': 'ახალი მენიუს შექმნა',
+  'VENUE_MODAL_EDIT': 'მენიუს რედაქტირება',
   'VENUE_CHANGE_PHOTO': 'ფოტოს შეცვლა',
   'VENUE_UPDATE_BUTTON': 'განახლება',
   'VENUE_CREATE_BUTTON': 'შექმნა',
-  'VENUE_EMPTY_STATE': 'ვენიუები არ მოიძებნა.',
-  'VENUE_CREATE_FIRST': 'შექმენით თქვენი პირველი ვენიუ',
+  'VENUE_EMPTY_STATE': 'მენიუები არ მოიძებნა.',
+  'VENUE_CREATE_FIRST': 'შექმენით თქვენი პირველი მენიუ',
 
   // Menu Management
   'MENU_TITLE': 'მენიუების მართვა',
-  'MENU_ADD_BUTTON': 'მენიუს დამატება',
+  'MENU_ADD_BUTTON': 'კატეგორიის დამატება',
   'MENU_NAME_LABEL': 'მენიუს დასახელება',
   'MENU_UPDATE_BUTTON': 'განახლება',
   'MENU_CREATE_BUTTON': 'შექმნა',

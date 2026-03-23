@@ -107,6 +107,15 @@ app.UseSwaggerUI(c => {
 
 app.UseMiddleware<ExceptionMiddleware>();
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers.Append("Access-Control-Allow-Origin", "*");
+        ctx.Context.Response.Headers.Append("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    }
+});
+
 app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
@@ -114,7 +123,6 @@ app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseStaticFiles();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 
