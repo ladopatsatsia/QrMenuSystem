@@ -13,13 +13,11 @@ services:
     plan: free
 
   # Frontend (Admin + Public)
-  - type: static
+  - type: web
     name: qrmenu-frontend
+    env: static
     buildCommand: "cd frontend && npm install && npm run build"
-    publishPath: "frontend/dist/frontend/browser"
-    envVars:
-      - key: NODE_VERSION
-        value: 18
+    staticPublishPath: "frontend/dist/frontend/browser"
     plan: free
 
 databases:
