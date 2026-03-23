@@ -18,6 +18,14 @@ namespace MenuManagement.API.Controllers.Admin
             return Ok(await Mediator.Send(new GetMenusByObjectIdQuery { ObjectId = objectId }));
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var result = await Mediator.Send(new GetMenuByIdQuery { Id = id });
+            if (!result.Succeeded) return NotFound(result);
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateMenuCommand command)
         {

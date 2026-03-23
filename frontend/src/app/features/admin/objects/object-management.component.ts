@@ -14,12 +14,24 @@ import { timeout } from 'rxjs';
   imports: [CommonModule, FormsModule, RouterModule],
   template: `
     <div class="container mt-4">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold text-dark">{{ translate('VENUE_TITLE') }}</h2>
-        <button class="btn btn-primary rounded-pill px-4 shadow-sm" (click)="openCreate()">
-          <i class="bi bi-plus-lg me-2"></i>{{ translate('VENUE_ADD_BUTTON') }}
-        </button>
-      </div>
+      <!-- Breadcrumbs & Nav -->
+      <nav class="mb-3">
+        <ol class="breadcrumb mb-2">
+          <li class="breadcrumb-item"><a routerLink="/admin" class="text-decoration-none text-muted small">{{ translate('BREADCRUMB_HOME') }}</a></li>
+          <li class="breadcrumb-item active small text-primary" aria-current="page">{{ translate('BREADCRUMB_VENUES') }}</li>
+        </ol>
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-light rounded-pill px-3 shadow-sm border" [routerLink]="['/admin']">
+              <i class="bi bi-arrow-left me-2"></i>{{ translate('NAV_BACK') }}
+            </button>
+            <h2 class="fw-bold text-dark mb-0">{{ translate('VENUE_TITLE') }}</h2>
+          </div>
+          <button class="btn btn-primary rounded-pill px-4 shadow-sm" (click)="openCreate()">
+            <i class="bi bi-plus-lg me-2"></i>{{ translate('VENUE_ADD_BUTTON') }}
+          </button>
+        </div>
+      </nav>
 
       <div class="venue-list">
         <div *ngFor="let obj of objects" class="card shadow-sm mb-3 rounded-4 border-0 hover-card">

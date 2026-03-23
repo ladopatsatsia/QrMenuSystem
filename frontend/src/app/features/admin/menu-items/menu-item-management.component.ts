@@ -16,17 +16,26 @@ import { CdkDragDrop, moveItemInArray, DragDropModule } from '@angular/cdk/drag-
   imports: [CommonModule, FormsModule, RouterModule, DragDropModule],
   template: `
     <div class="container mt-4 pb-5">
-      <div class="toolbar mb-4">
-        <div class="toolbar__left">
-          <button class="btn btn-light rounded-pill px-3 shadow-sm back-button" type="button" (click)="goBackToMenus()">
-            <i class="bi bi-arrow-left me-2"></i>მენიუში დაბრუნება
+      <!-- Breadcrumbs & Nav -->
+      <nav class="mb-3">
+        <ol class="breadcrumb mb-2">
+          <li class="breadcrumb-item"><a routerLink="/admin" class="text-decoration-none text-muted small">{{ translate('BREADCRUMB_HOME') }}</a></li>
+          <li class="breadcrumb-item"><a routerLink="/admin/objects" class="text-decoration-none text-muted small">{{ translate('BREADCRUMB_VENUES') }}</a></li>
+          <li class="breadcrumb-item"><a [routerLink]="['/admin/menus', objectId]" class="text-decoration-none text-muted small">{{ objectName || '...' }}</a></li>
+          <li class="breadcrumb-item active small text-primary" aria-current="page">{{ menuName || '...' }}</li>
+        </ol>
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-light rounded-pill px-3 shadow-sm border" [routerLink]="['/admin/menus', objectId]">
+              <i class="bi bi-arrow-left me-2"></i>{{ translate('NAV_BACK_TO_CATEGORIES') }}
+            </button>
+            <h2 class="fw-bold text-dark mb-0">{{ translate('MENU_ITEM_TITLE') }}</h2>
+          </div>
+          <button class="btn btn-primary rounded-pill px-4 shadow-sm" (click)="openCreate()">
+            <i class="bi bi-plus-lg me-2"></i>{{ translate('MENU_ITEM_ADD_BUTTON') }}
           </button>
-          <h2 class="fw-bold text-dark mb-0">{{ translate('MENU_ITEM_TITLE') }}</h2>
         </div>
-        <button class="btn btn-primary rounded-pill px-4 shadow-sm" (click)="openCreate()">
-          <i class="bi bi-plus-lg me-2"></i>{{ translate('MENU_ITEM_ADD_BUTTON') }}
-        </button>
-      </div>
+      </nav>
  
       <div class="menu-item-list" cdkDropList (cdkDropListDropped)="drop($event)">
         <div *ngFor="let item of menuItems" cdkDrag class="card shadow-sm mb-3 rounded-4 border-0 hover-card drag-item">
@@ -309,6 +318,9 @@ import { CdkDragDrop, moveItemInArray, DragDropModule } from '@angular/cdk/drag-
 export class MenuItemManagementComponent implements OnInit {
   menuItems: any[] = [];
   menuId: any;
+  menuName: string = '';
+  objectId: any = null;
+  objectName: string = '';
   isModalOpen = false;
   editingItem: any = {};
   isUploading = false;
@@ -318,6 +330,23 @@ export class MenuItemManagementComponent implements OnInit {
   ngOnInit() {
     this.menuId = this.route.snapshot.paramMap.get('menuId');
     this.loadMenuItems();
+    this.loadMenuDetails();
+  }
+
+  loadMenuDetails() {
+    this.api.get(`/admin/menus/${this.menuId}`).subscribe(res => {
+      this.menuName = res.resultData.name;
+      this.objectId = res.resultData.objectId;
+      this.loadObjectName();
+    });
+  }
+
+  loadObjectName() {
+    if (this.objectId) {
+      this.api.get(`/admin/objects/${this.objectId}`).subscribe(res => {
+        this.objectName = res.resultData.name;
+      });
+    }
   }
 
   translate(key: string): string {

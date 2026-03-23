@@ -15,12 +15,25 @@ import { CdkDragDrop, moveItemInArray, DragDropModule } from '@angular/cdk/drag-
   imports: [CommonModule, FormsModule, RouterModule, DragDropModule],
   template: `
     <div class="container mt-4 pb-5">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold text-dark">{{ translate('MENU_TITLE') }}</h2>
-        <button class="btn btn-primary rounded-pill px-4 shadow-sm" (click)="openCreate()">
-          <i class="bi bi-plus-lg me-2"></i>{{ translate('MENU_ADD_BUTTON') }}
-        </button>
-      </div>
+      <!-- Breadcrumbs & Nav -->
+      <nav class="mb-3">
+        <ol class="breadcrumb mb-2">
+          <li class="breadcrumb-item"><a routerLink="/admin" class="text-decoration-none text-muted small">{{ translate('BREADCRUMB_HOME') }}</a></li>
+          <li class="breadcrumb-item"><a routerLink="/admin/objects" class="text-decoration-none text-muted small">{{ translate('BREADCRUMB_VENUES') }}</a></li>
+          <li class="breadcrumb-item active small text-primary" aria-current="page">{{ objectName || '...' }}</li>
+        </ol>
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-light rounded-pill px-3 shadow-sm border" [routerLink]="['/admin/objects']">
+              <i class="bi bi-arrow-left me-2"></i>{{ translate('NAV_BACK_TO_VENUES') }}
+            </button>
+            <h2 class="fw-bold text-dark mb-0">{{ translate('MENU_TITLE') }}</h2>
+          </div>
+          <button class="btn btn-primary rounded-pill px-4 shadow-sm" (click)="openCreate()">
+            <i class="bi bi-plus-lg me-2"></i>{{ translate('MENU_ADD_BUTTON') }}
+          </button>
+        </div>
+      </nav>
  
       <div class="menu-list" cdkDropList (cdkDropListDropped)="drop($event)">
         <div *ngFor="let menu of menus" cdkDrag class="card shadow-sm mb-3 rounded-4 border-0 hover-card drag-item">
@@ -165,6 +178,7 @@ import { CdkDragDrop, moveItemInArray, DragDropModule } from '@angular/cdk/drag-
 export class MenuManagementComponent implements OnInit {
   menus: any[] = [];
   objectId: any;
+  objectName: string = '';
   isModalOpen = false;
   editingMenu: any = {};
   isUploading = false;
@@ -174,6 +188,13 @@ export class MenuManagementComponent implements OnInit {
   ngOnInit() {
     this.objectId = this.route.snapshot.paramMap.get('objectId');
     this.loadMenus();
+    this.loadObjectName();
+  }
+
+  loadObjectName() {
+    this.api.get(`/admin/objects/${this.objectId}`).subscribe(res => {
+      this.objectName = res.resultData.name;
+    });
   }
 
   translate(key: string): string {

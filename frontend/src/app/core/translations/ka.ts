@@ -10,6 +10,11 @@ export const KA = {
   'BUTTON_DELETE': 'წაშლა',
   'BUTTON_MENUS': 'მენიუები',
   'CONFIRM_DELETE': 'დარწმუნებული ხართ?',
+  'BREADCRUMB_HOME': 'მთავარი',
+  'BREADCRUMB_VENUES': 'მენიუები',
+  'NAV_BACK': 'უკან',
+  'NAV_BACK_TO_VENUES': 'მენიუებში დაბრუნება',
+  'NAV_BACK_TO_CATEGORIES': 'კატეგორიებში დაბრუნება',
 
   // Dashboard
   'DASHBOARD_TITLE': 'სტატისტიკა',
