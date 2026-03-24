@@ -2,6 +2,7 @@ export const KA = {
   // Sidebar & Common
   'SIDEBAR_DASHBOARD': 'მთავარი გვერდი',
   'SIDEBAR_MANAGE_VENUES': 'მენიუების მართვა',
+  'SIDEBAR_CHANGE_PASSWORD': 'პაროლის შეცვლა',
   'SIDEBAR_LOGGED_IN_AS': 'შესული ხართ როგორც',
   'BUTTON_LOGOUT': 'გამოსვლა',
   'BUTTON_SAVE': 'შენახვა',

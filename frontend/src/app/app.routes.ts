@@ -16,6 +16,7 @@ export const routes: Routes = [
       { path: 'objects', loadComponent: () => import('./features/admin/objects/object-management.component').then(m => m.ObjectManagementComponent) },
       { path: 'menus/:objectId', loadComponent: () => import('./features/admin/menus/menu-management.component').then(m => m.MenuManagementComponent) },
       { path: 'menu-items/:menuId', loadComponent: () => import('./features/admin/menu-items/menu-item-management.component').then(m => m.MenuItemManagementComponent) },
+      { path: 'change-password', loadComponent: () => import('./features/admin/auth/change-password.component').then(m => m.ChangePasswordComponent) },
       // Other admin routes can be added here
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
