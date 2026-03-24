@@ -42,3 +42,65 @@
 .breadcrumb-item a:hover {
   color: #0d6efd !important;
 }
+
+.admin-page {
+  padding-bottom: 2.5rem;
+}
+
+.admin-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-toolbar__left,
+.admin-toolbar__right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.admin-toolbar__title {
+  margin: 0;
+  min-width: 0;
+}
+
+@media (max-width: 767.98px) {
+  .admin-page {
+    padding-bottom: 5rem;
+  }
+
+  .admin-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-toolbar__left,
+  .admin-toolbar__right {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .admin-toolbar__right > .btn,
+  .admin-toolbar__left > .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modal-dialog {
+    margin: 0.75rem;
+  }
+
+  .modal-content {
+    border-radius: 1rem !important;
+  }
+
+  .btn-group.w-100 > .btn {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 0.875rem;
+  }
+}

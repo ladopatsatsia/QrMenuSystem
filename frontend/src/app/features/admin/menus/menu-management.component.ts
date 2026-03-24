@@ -14,7 +14,7 @@ import { CdkDragDrop, moveItemInArray, DragDropModule } from '@angular/cdk/drag-
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule, DragDropModule],
   template: `
-    <div class="container mt-4 pb-5">
+    <div class="container mt-4 pb-5 admin-page">
       <!-- Breadcrumbs & Nav -->
       <nav class="mb-3">
         <ol class="breadcrumb mb-2">
@@ -22,16 +22,18 @@ import { CdkDragDrop, moveItemInArray, DragDropModule } from '@angular/cdk/drag-
           <li class="breadcrumb-item"><a routerLink="/admin/objects" class="text-decoration-none text-muted small">{{ translate('BREADCRUMB_VENUES') }}</a></li>
           <li class="breadcrumb-item active small text-primary" aria-current="page">{{ objectName || '...' }}</li>
         </ol>
-        <div class="d-flex align-items-center justify-content-between mb-4">
-          <div class="d-flex align-items-center gap-3">
+        <div class="admin-toolbar">
+          <div class="admin-toolbar__left">
             <button class="btn btn-light rounded-pill px-3 shadow-sm border" [routerLink]="['/admin/objects']">
               <i class="bi bi-arrow-left me-2"></i>{{ translate('NAV_BACK_TO_VENUES') }}
             </button>
-            <h2 class="fw-bold text-dark mb-0">{{ translate('MENU_TITLE') }}</h2>
+            <h2 class="fw-bold text-dark admin-toolbar__title">{{ translate('MENU_TITLE') }}</h2>
           </div>
+          <div class="admin-toolbar__right">
           <button class="btn btn-primary rounded-pill px-4 shadow-sm" (click)="openCreate()">
             <i class="bi bi-plus-lg me-2"></i>{{ translate('MENU_ADD_BUTTON') }}
           </button>
+          </div>
         </div>
       </nav>
  

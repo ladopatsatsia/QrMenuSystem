@@ -10,7 +10,7 @@ import { TranslationService } from '../../../core/services/translation.service';
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
   template: `
-    <div class="container py-4">
+    <div class="container py-4 admin-page">
       <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
           <div class="d-flex align-items-center mb-4">

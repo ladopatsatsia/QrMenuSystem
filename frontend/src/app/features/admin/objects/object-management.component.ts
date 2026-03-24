@@ -13,23 +13,25 @@ import { timeout } from 'rxjs';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   template: `
-    <div class="container mt-4">
+    <div class="container mt-4 admin-page">
       <!-- Breadcrumbs & Nav -->
       <nav class="mb-3">
         <ol class="breadcrumb mb-2">
           <li class="breadcrumb-item"><a routerLink="/admin" class="text-decoration-none text-muted small">{{ translate('BREADCRUMB_HOME') }}</a></li>
           <li class="breadcrumb-item active small text-primary" aria-current="page">{{ translate('BREADCRUMB_VENUES') }}</li>
         </ol>
-        <div class="d-flex align-items-center justify-content-between mb-4">
-          <div class="d-flex align-items-center gap-3">
+        <div class="admin-toolbar">
+          <div class="admin-toolbar__left">
             <button class="btn btn-light rounded-pill px-3 shadow-sm border" [routerLink]="['/admin']">
               <i class="bi bi-arrow-left me-2"></i>{{ translate('NAV_BACK') }}
             </button>
-            <h2 class="fw-bold text-dark mb-0">{{ translate('VENUE_TITLE') }}</h2>
+            <h2 class="fw-bold text-dark admin-toolbar__title">{{ translate('VENUE_TITLE') }}</h2>
           </div>
+          <div class="admin-toolbar__right">
           <button class="btn btn-primary rounded-pill px-4 shadow-sm" (click)="openCreate()">
             <i class="bi bi-plus-lg me-2"></i>{{ translate('VENUE_ADD_BUTTON') }}
           </button>
+          </div>
         </div>
       </nav>
 

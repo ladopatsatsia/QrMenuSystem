@@ -9,17 +9,19 @@ import { TranslationService } from '../../../core/services/translation.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div class="container mt-4 pb-5">
-      <div class="d-flex align-items-center mb-4">
-        <h2 class="fw-bold text-dark mb-0"><i class="bi bi-translate me-2 text-primary"></i>{{ translate('LANG_MGMT_TITLE') }}</h2>
+    <div class="container mt-4 pb-5 admin-page">
+      <div class="admin-toolbar">
+        <div class="admin-toolbar__left">
+          <h2 class="fw-bold text-dark admin-toolbar__title"><i class="bi bi-translate me-2 text-primary"></i>{{ translate('LANG_MGMT_TITLE') }}</h2>
+        </div>
       </div>
 
       <div class="card shadow-sm rounded-4 border-0 p-4">
         <p class="text-muted mb-4">{{ translate('LANG_MGMT_SUBTITLE') }}</p>
 
         <div class="list-group list-group-flush">
-          <div *ngFor="let lang of languages" class="list-group-item d-flex align-items-center justify-content-between py-3 border-0 rounded-3 mb-2 bg-light-hover">
-            <div class="d-flex align-items-center">
+          <div *ngFor="let lang of languages" class="list-group-item d-flex align-items-center justify-content-between flex-wrap gap-3 py-3 border-0 rounded-3 mb-2 bg-light-hover">
+            <div class="d-flex align-items-center min-w-0">
               <span class="fs-4 me-3">{{ getFlag(lang.code) }}</span>
               <div>
                 <h6 class="mb-0 fw-bold">{{ translate('LANG_NAME_' + lang.code.toUpperCase()) }}</h6>

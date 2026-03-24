@@ -10,7 +10,7 @@ import { TranslationService } from '../../core/services/translation.service';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4 admin-page">
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <h1 class="mb-4 fw-bold text-dark">{{ translate('DASHBOARD_TITLE') }}</h1>
@@ -20,7 +20,7 @@ import { TranslationService } from '../../core/services/translation.service';
                 <div class="col-md-8">
                   <h3 class="fw-bold text-primary mb-3">{{ translate('DASHBOARD_WELCOME') }}</h3>
                   <p class="text-muted fs-5 mb-4">You can manage your venues, menus, and dishes using the side menu or the quick links below.</p>
-                  <div class="d-flex gap-3">
+                  <div class="d-flex gap-3 flex-column flex-sm-row">
                     <a routerLink="/admin/objects" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm">{{ translate('SIDEBAR_MANAGE_VENUES') }}</a>
                     <a routerLink="/admin/change-password" class="btn btn-outline-secondary btn-lg rounded-pill px-4 shadow-sm fw-bold">{{ translate('SIDEBAR_CHANGE_PASSWORD') }}</a>
                   </div>
