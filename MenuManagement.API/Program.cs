@@ -92,18 +92,25 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AppCorsPolicy", policy =>
     {
-        if (allowedOrigins is { Length: > 0 })
-        {
-            policy.WithOrigins(allowedOrigins)
-                  .AllowAnyMethod()
-                  .AllowAnyHeader();
-        }
-        else
-        {
-            policy.AllowAnyOrigin()
-                  .AllowAnyMethod()
-                  .AllowAnyHeader();
-        }
+        var configuredOrigins = allowedOrigins ?? Array.Empty<string>();
+
+        policy.SetIsOriginAllowed(origin =>
+              {
+                  if (configuredOrigins.Contains(origin, StringComparer.OrdinalIgnoreCase))
+                  {
+                      return true;
+                  }
+
+                  if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri))
+                  {
+                      return false;
+                  }
+
+                  return uri.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase)
+                      || uri.Host.EndsWith(".onrender.com", StringComparison.OrdinalIgnoreCase);
+              })
+              .AllowAnyMethod()
+              .AllowAnyHeader();
     });
 });
 

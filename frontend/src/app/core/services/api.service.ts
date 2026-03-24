@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  private getHeaders(body?: any) {
+  private getHeaders(method: 'GET' | 'POST' | 'PUT' | 'DELETE', body?: any) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     let headers: any = {};
     
@@ -15,8 +15,8 @@ export class ApiService {
       headers['Authorization'] = `Bearer ${currentUser.token}`;
     }
 
-    // Only set Content-Type if NOT FormData. HttpClient handles FormData automatically.
-    if (!(body instanceof FormData)) {
+    // Only send JSON content type on requests that actually have a JSON body.
+    if ((method === 'POST' || method === 'PUT') && !(body instanceof FormData)) {
       headers['Content-Type'] = 'application/json';
     }
 
@@ -24,18 +24,18 @@ export class ApiService {
   }
 
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-    return this.http.get(`${environment.apiUrl}${path}`, { params, headers: this.getHeaders() });
+    return this.http.get(`${environment.apiUrl}${path}`, { params, headers: this.getHeaders('GET') });
   }
 
   put(path: string, body: any = {}): Observable<any> {
-    return this.http.put(`${environment.apiUrl}${path}`, body, { headers: this.getHeaders(body) });
+    return this.http.put(`${environment.apiUrl}${path}`, body, { headers: this.getHeaders('PUT', body) });
   }
 
   post(path: string, body: any = {}): Observable<any> {
-    return this.http.post(`${environment.apiUrl}${path}`, body, { headers: this.getHeaders(body) });
+    return this.http.post(`${environment.apiUrl}${path}`, body, { headers: this.getHeaders('POST', body) });
   }
 
   delete(path: string): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}${path}`, { headers: this.getHeaders() });
+    return this.http.delete(`${environment.apiUrl}${path}`, { headers: this.getHeaders('DELETE') });
   }
 }
