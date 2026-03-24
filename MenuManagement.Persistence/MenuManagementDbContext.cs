@@ -18,6 +18,7 @@ namespace MenuManagement.Persistence
         public DbSet<MenuEntity> Menus => Set<MenuEntity>();
         public DbSet<MenuItemEntity> MenuItems => Set<MenuItemEntity>();
         public DbSet<UserEntity> Users => Set<UserEntity>();
+        public DbSet<LanguageSetting> LanguageSettings => Set<LanguageSetting>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,6 +38,7 @@ namespace MenuManagement.Persistence
                 modelBuilder.Entity<ObjectEntity>().ToTable("objects");
                 modelBuilder.Entity<MenuEntity>().ToTable("menus");
                 modelBuilder.Entity<MenuItemEntity>().ToTable("menu_items");
+                modelBuilder.Entity<LanguageSetting>().ToTable("language_settings");
             }
         }
 

@@ -11,9 +11,15 @@ namespace MenuManagement.Application.Features.Objects.Commands
     public class CreateObjectCommand : IRequest<OperationResult<Guid>>
     {
         public string Name { get; set; } = string.Empty;
+        public string? NameEn { get; set; }
+        public string? NameRu { get; set; }
         public string? Description { get; set; }
+        public string? DescriptionEn { get; set; }
+        public string? DescriptionRu { get; set; }
         public string? ImageUrl { get; set; }
         public string? Address { get; set; }
+        public string? AddressEn { get; set; }
+        public string? AddressRu { get; set; }
         public string? Phone { get; set; }
         public bool IsActive { get; set; } = true;
     }
@@ -32,9 +38,15 @@ namespace MenuManagement.Application.Features.Objects.Commands
             var entity = new ObjectEntity
             {
                 Name = request.Name,
+                NameEn = request.NameEn,
+                NameRu = request.NameRu,
                 Description = request.Description,
+                DescriptionEn = request.DescriptionEn,
+                DescriptionRu = request.DescriptionRu,
                 ImageUrl = request.ImageUrl,
                 Address = request.Address,
+                AddressEn = request.AddressEn,
+                AddressRu = request.AddressRu,
                 Phone = request.Phone,
                 IsActive = request.IsActive
             };

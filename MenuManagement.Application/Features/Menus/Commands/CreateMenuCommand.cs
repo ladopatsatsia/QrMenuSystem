@@ -13,7 +13,11 @@ namespace MenuManagement.Application.Features.Menus.Commands
     {
         public Guid ObjectId { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string? NameEn { get; set; }
+        public string? NameRu { get; set; }
         public string? Description { get; set; }
+        public string? DescriptionEn { get; set; }
+        public string? DescriptionRu { get; set; }
         public int SortOrder { get; set; }
         public string? ImageUrl { get; set; }
         public bool IsActive { get; set; } = true;
@@ -40,7 +44,11 @@ namespace MenuManagement.Application.Features.Menus.Commands
             {
                 ObjectId = request.ObjectId,
                 Name = request.Name,
+                NameEn = request.NameEn,
+                NameRu = request.NameRu,
                 Description = request.Description,
+                DescriptionEn = request.DescriptionEn,
+                DescriptionRu = request.DescriptionRu,
                 SortOrder = request.SortOrder,
                 ImageUrl = request.ImageUrl,
                 IsActive = request.IsActive

@@ -14,6 +14,7 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', loadComponent: () => import('./features/admin/dashboard.component').then(m => m.DashboardComponent) },
       { path: 'objects', loadComponent: () => import('./features/admin/objects/object-management.component').then(m => m.ObjectManagementComponent) },
+      { path: 'language-management', loadComponent: () => import('./features/admin/language-management/language-management.component').then(m => m.LanguageManagementComponent) },
       { path: 'menus/:objectId', loadComponent: () => import('./features/admin/menus/menu-management.component').then(m => m.MenuManagementComponent) },
       { path: 'menu-items/:menuId', loadComponent: () => import('./features/admin/menu-items/menu-item-management.component').then(m => m.MenuItemManagementComponent) },
       { path: 'change-password', loadComponent: () => import('./features/admin/auth/change-password.component').then(m => m.ChangePasswordComponent) },

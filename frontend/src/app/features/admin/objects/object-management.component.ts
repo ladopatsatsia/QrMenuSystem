@@ -104,17 +104,59 @@ import { timeout } from 'rxjs';
                 <div class="mt-2 text-muted small">{{ isUploading ? 'Uploading...' : translate('VENUE_PHOTO_LABEL') }}</div>
               </div>
 
-              <div class="mb-3">
-                <label class="form-label fw-medium">{{ translate('VENUE_NAME_LABEL') }}</label>
-                <input [(ngModel)]="editingObject.name" class="form-control rounded-3" [placeholder]="translate('VENUE_NAME_LABEL')">
+              <!-- Language Tabs -->
+              <div class="btn-group btn-group-sm w-100 mb-4 shadow-sm rounded-3">
+                <button type="button" class="btn" [ngClass]="activeLang === 'ka' ? 'btn-primary' : 'btn-outline-primary'" (click)="activeLang = 'ka'">ქართული</button>
+                <button type="button" class="btn" [ngClass]="activeLang === 'en' ? 'btn-primary' : 'btn-outline-primary'" (click)="activeLang = 'en'">English</button>
+                <button type="button" class="btn" [ngClass]="activeLang === 'ru' ? 'btn-primary' : 'btn-outline-primary'" (click)="activeLang = 'ru'">Русский</button>
               </div>
-              <div class="mb-3">
-                <label class="form-label fw-medium">{{ translate('VENUE_ADDRESS_LABEL') }}</label>
-                <input [(ngModel)]="editingObject.address" class="form-control rounded-3" [placeholder]="translate('VENUE_ADDRESS_LABEL')">
+
+              <!-- Georgian Fields -->
+              <div *ngIf="activeLang === 'ka'">
+                <div class="mb-3">
+                  <label class="form-label fw-medium">{{ translate('FIELD_NAME_KA') }}</label>
+                  <input [(ngModel)]="editingObject.name" class="form-control rounded-3" [placeholder]="translate('VENUE_NAME_LABEL')">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-medium">{{ translate('FIELD_ADDRESS_KA') }}</label>
+                  <input [(ngModel)]="editingObject.address" class="form-control rounded-3" [placeholder]="translate('VENUE_ADDRESS_LABEL')">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-medium">{{ translate('FIELD_DESCRIPTION_KA') }}</label>
+                  <textarea [(ngModel)]="editingObject.description" class="form-control rounded-3" [placeholder]="translate('VENUE_DESCRIPTION_LABEL')" rows="3"></textarea>
+                </div>
               </div>
-              <div class="mb-3">
-                <label class="form-label fw-medium">{{ translate('VENUE_DESCRIPTION_LABEL') }}</label>
-                <textarea [(ngModel)]="editingObject.description" class="form-control rounded-3" [placeholder]="translate('VENUE_DESCRIPTION_LABEL')" rows="3"></textarea>
+
+              <!-- English Fields -->
+              <div *ngIf="activeLang === 'en'">
+                <div class="mb-3">
+                  <label class="form-label fw-medium">{{ translate('FIELD_NAME_EN') }}</label>
+                  <input [(ngModel)]="editingObject.nameEn" class="form-control rounded-3" placeholder="Name (English)">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-medium">{{ translate('FIELD_ADDRESS_EN') }}</label>
+                  <input [(ngModel)]="editingObject.addressEn" class="form-control rounded-3" placeholder="Address (English)">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-medium">{{ translate('FIELD_DESCRIPTION_EN') }}</label>
+                  <textarea [(ngModel)]="editingObject.descriptionEn" class="form-control rounded-3" placeholder="Description (English)" rows="3"></textarea>
+                </div>
+              </div>
+
+              <!-- Russian Fields -->
+              <div *ngIf="activeLang === 'ru'">
+                <div class="mb-3">
+                  <label class="form-label fw-medium">{{ translate('FIELD_NAME_RU') }}</label>
+                  <input [(ngModel)]="editingObject.nameRu" class="form-control rounded-3" placeholder="Название (Русский)">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-medium">{{ translate('FIELD_ADDRESS_RU') }}</label>
+                  <input [(ngModel)]="editingObject.addressRu" class="form-control rounded-3" placeholder="Адрес (Русский)">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-medium">{{ translate('FIELD_DESCRIPTION_RU') }}</label>
+                  <textarea [(ngModel)]="editingObject.descriptionRu" class="form-control rounded-3" placeholder="Описание (Русский)" rows="3"></textarea>
+                </div>
               </div>
             </div>
             <div class="modal-footer border-0">
@@ -151,6 +193,7 @@ export class ObjectManagementComponent implements OnInit {
   isModalOpen = false;
   editingObject: any = {};
   isUploading = false;
+  activeLang: 'ka' | 'en' | 'ru' = 'ka';
 
   constructor(private api: ApiService, private translationService: TranslationService, private imageService: ImageService) {}
 
@@ -204,11 +247,13 @@ export class ObjectManagementComponent implements OnInit {
 
   openCreate() {
     this.editingObject = { isActive: true };
+    this.activeLang = 'ka';
     this.isModalOpen = true;
   }
 
   edit(obj: any) {
     this.editingObject = { ...obj };
+    this.activeLang = 'ka';
     this.isModalOpen = true;
   }
 

@@ -101,13 +101,47 @@ import { CdkDragDrop, moveItemInArray, DragDropModule } from '@angular/cdk/drag-
             <div class="modal-body p-4">
               <div class="row">
                 <div class="col-md-7">
-                  <div class="mb-3">
-                    <label class="form-label fw-bold small text-uppercase text-muted">{{ translate('MENU_NAME_LABEL') }}</label>
-                    <input [(ngModel)]="editingMenu.name" class="form-control form-control-lg rounded-3 border-2" placeholder="e.g. Breakfast, Main Course">
+                  <!-- Language Tabs -->
+                  <div class="btn-group btn-group-sm w-100 mb-4 shadow-sm rounded-3">
+                    <button type="button" class="btn" [ngClass]="activeLang === 'ka' ? 'btn-primary' : 'btn-outline-primary'" (click)="activeLang = 'ka'">ქართული</button>
+                    <button type="button" class="btn" [ngClass]="activeLang === 'en' ? 'btn-primary' : 'btn-outline-primary'" (click)="activeLang = 'en'">English</button>
+                    <button type="button" class="btn" [ngClass]="activeLang === 'ru' ? 'btn-primary' : 'btn-outline-primary'" (click)="activeLang = 'ru'">Русский</button>
                   </div>
-                  <div class="mb-3">
-                    <label class="form-label fw-bold small text-uppercase text-muted">{{ translate('VENUE_DESCRIPTION_LABEL') }}</label>
-                    <textarea [(ngModel)]="editingMenu.description" class="form-control rounded-3 border-2" placeholder="Optional description..." rows="4"></textarea>
+
+                  <!-- Georgian Fields -->
+                  <div *ngIf="activeLang === 'ka'">
+                    <div class="mb-3">
+                      <label class="form-label fw-bold small text-uppercase text-muted">{{ translate('FIELD_NAME_KA') }}</label>
+                      <input [(ngModel)]="editingMenu.name" class="form-control form-control-lg rounded-3 border-2" [placeholder]="translate('MENU_NAME_LABEL')">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold small text-uppercase text-muted">{{ translate('FIELD_DESCRIPTION_KA') }}</label>
+                      <textarea [(ngModel)]="editingMenu.description" class="form-control rounded-3 border-2" [placeholder]="translate('VENUE_DESCRIPTION_LABEL')" rows="4"></textarea>
+                    </div>
+                  </div>
+
+                  <!-- English Fields -->
+                  <div *ngIf="activeLang === 'en'">
+                    <div class="mb-3">
+                      <label class="form-label fw-bold small text-uppercase text-muted">{{ translate('FIELD_NAME_EN') }}</label>
+                      <input [(ngModel)]="editingMenu.nameEn" class="form-control form-control-lg rounded-3 border-2" placeholder="Name (English)">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold small text-uppercase text-muted">{{ translate('FIELD_DESCRIPTION_EN') }}</label>
+                      <textarea [(ngModel)]="editingMenu.descriptionEn" class="form-control rounded-3 border-2" placeholder="Description (English)" rows="4"></textarea>
+                    </div>
+                  </div>
+
+                  <!-- Russian Fields -->
+                  <div *ngIf="activeLang === 'ru'">
+                    <div class="mb-3">
+                      <label class="form-label fw-bold small text-uppercase text-muted">{{ translate('FIELD_NAME_RU') }}</label>
+                      <input [(ngModel)]="editingMenu.nameRu" class="form-control form-control-lg rounded-3 border-2" placeholder="Название (Русский)">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold small text-uppercase text-muted">{{ translate('FIELD_DESCRIPTION_RU') }}</label>
+                      <textarea [(ngModel)]="editingMenu.descriptionRu" class="form-control rounded-3 border-2" placeholder="Описание (Русский)" rows="4"></textarea>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-5 mt-3 mt-md-0 border-start ps-md-4">
@@ -182,6 +216,7 @@ export class MenuManagementComponent implements OnInit {
   isModalOpen = false;
   editingMenu: any = {};
   isUploading = false;
+  activeLang: 'ka' | 'en' | 'ru' = 'ka';
 
   constructor(private api: ApiService, private route: ActivatedRoute, private imageService: ImageService, private translationService: TranslationService) {}
 
@@ -275,11 +310,13 @@ export class MenuManagementComponent implements OnInit {
 
   openCreate() {
     this.editingMenu = { objectId: this.objectId, sortOrder: 0, isActive: true };
+    this.activeLang = 'ka';
     this.isModalOpen = true;
   }
 
   edit(menu: any) {
     this.editingMenu = { ...menu };
+    this.activeLang = 'ka';
     this.isModalOpen = true;
   }
 

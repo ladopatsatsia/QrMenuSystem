@@ -2,6 +2,7 @@ using MenuManagement.Application.Features.MenuItems.Queries;
 using MenuManagement.Application.Features.Menus.Queries;
 using MenuManagement.Domain;
 using MenuManagement.Application.Features.Objects.Queries;
+using MenuManagement.Application.Features.LanguageSettings.Queries.GetActiveLanguages;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -33,6 +34,12 @@ namespace MenuManagement.API.Controllers.Public
         public async Task<IActionResult> GetItemsByMenuId(Guid menuId)
         {
             return Ok(await Mediator.Send(new GetMenuItemsByMenuIdQuery { MenuId = menuId }));
+        }
+
+        [HttpGet("languages")]
+        public async Task<IActionResult> GetActiveLanguages()
+        {
+            return Ok(await Mediator.Send(new GetActiveLanguagesQuery()));
         }
     }
 }

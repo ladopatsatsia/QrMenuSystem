@@ -1,8 +1,9 @@
 export const KA = {
   // Sidebar & Common
   'SIDEBAR_DASHBOARD': 'მთავარი გვერდი',
-  'SIDEBAR_MANAGE_VENUES': 'მენიუების მართვა',
+  'SIDEBAR_MANAGE_VENUES': 'ობიექტების მართვა',
   'SIDEBAR_CHANGE_PASSWORD': 'პაროლის შეცვლა',
+  'SIDEBAR_LANGUAGE_MANAGEMENT': 'ენების მართვა',
   'SIDEBAR_LOGGED_IN_AS': 'შესული ხართ როგორც',
   'BUTTON_LOGOUT': 'გამოსვლა',
   'BUTTON_SAVE': 'შენახვა',
@@ -27,6 +28,20 @@ export const KA = {
   'PASSWORD_CHANGE_SUCCESS': 'პაროლი წარმატებით შეიცვალა',
   'PASSWORD_CHANGE_ERROR': 'პაროლის შეცვლა ვერ მოხერხდა',
   'BUTTON_CHANGE_PASSWORD': 'შეცვლა',
+  'FIELD_NAME_KA': 'დასახელება (ქართული)',
+  'FIELD_NAME_EN': 'დასახელება (ინგლისური)',
+  'FIELD_NAME_RU': 'დასახელება (რუსული)',
+  'FIELD_DESCRIPTION_KA': 'აღწერა (ქართული)',
+  'FIELD_DESCRIPTION_EN': 'აღწერა (ინგლისური)',
+  'FIELD_DESCRIPTION_RU': 'აღწერა (რუსული)',
+  'LANG_MGMT_TITLE': 'ენების მართვა',
+  'LANG_MGMT_SUBTITLE': 'მონიშნეთ ენები, რომლებიც გსურთ ჩანდეს იუზერების მხარეს',
+  'LANG_NAME_KA': 'ქართული',
+  'LANG_NAME_EN': 'ინგლისური (English)',
+  'LANG_NAME_RU': 'რუსული (Русский)',
+  'FIELD_ADDRESS_KA': 'მისამართი (ქართული)',
+  'FIELD_ADDRESS_EN': 'მისამართი (ინგლისური)',
+  'FIELD_ADDRESS_RU': 'მისამართი (რუსული)',
 
   // Object Management (Venues)
   'VENUE_TITLE': 'ობიექტების მართვა',

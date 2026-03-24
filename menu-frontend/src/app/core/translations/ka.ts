@@ -1,4 +1,5 @@
 export const KA_TRANSLATIONS = {
+  'CHOOSE_LANGUAGE': 'აირჩიეთ ენა',
   'PUBLIC_VENUES_TITLE': 'ჩვენი ობიექტები',
   'PUBLIC_SEARCH_PLACEHOLDER': 'აღმოაჩინე საუკეთესო ადგილები და მათი შემოთავაზებები',
   'PUBLIC_NO_VENUES': 'ობიექტები ვერ მოიძებნა',

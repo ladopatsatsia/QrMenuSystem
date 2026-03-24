@@ -11,7 +11,11 @@ namespace MenuManagement.Application.Features.Menus.Commands
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string? NameEn { get; set; }
+        public string? NameRu { get; set; }
         public string? Description { get; set; }
+        public string? DescriptionEn { get; set; }
+        public string? DescriptionRu { get; set; }
         public int SortOrder { get; set; }
         public string? ImageUrl { get; set; }
         public bool IsActive { get; set; }
@@ -36,7 +40,11 @@ namespace MenuManagement.Application.Features.Menus.Commands
             }
 
             entity.Name = request.Name;
+            entity.NameEn = request.NameEn;
+            entity.NameRu = request.NameRu;
             entity.Description = request.Description;
+            entity.DescriptionEn = request.DescriptionEn;
+            entity.DescriptionRu = request.DescriptionRu;
             entity.SortOrder = request.SortOrder;
             entity.ImageUrl = request.ImageUrl;
             entity.IsActive = request.IsActive;

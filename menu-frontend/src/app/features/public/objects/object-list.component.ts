@@ -19,13 +19,13 @@ import { environment } from '../../../../environments/environment';
       <div class="venue-grid" *ngIf="objects.length > 0; else loading">
         <div class="venue-card shadow-sm" *ngFor="let obj of objects" [routerLink]="['/object', obj.id]">
           <div class="image-wrapper">
-            <img [src]="getFullUrl(obj.imageUrl)" [alt]="obj.name">
+            <img [src]="getFullUrl(obj.imageUrl)" [alt]="translateField(obj, 'Name')">
             <div class="overlay">
               <span class="view-btn">{{ translate('BUTTON_VIEW_MENU') }}</span>
             </div>
           </div>
           <div class="card-content text-center">
-            <h3 class="mb-0">{{ obj.name }}</h3>
+            <h3 class="mb-0">{{ translateField(obj, 'Name') }}</h3>
           </div>
         </div>
       </div>
@@ -99,6 +99,10 @@ export class ObjectListComponent implements OnInit {
 
   translate(key: string): string {
     return this.translationService.translate(key);
+  }
+
+  translateField(item: any, fieldBaseName: string): string {
+    return this.translationService.translateField(item, fieldBaseName);
   }
 
   getFullUrl(url: string): string {

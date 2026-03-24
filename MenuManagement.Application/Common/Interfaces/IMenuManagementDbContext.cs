@@ -11,6 +11,7 @@ namespace MenuManagement.Application.Common.Interfaces
         DbSet<MenuEntity> Menus { get; }
         DbSet<MenuItemEntity> MenuItems { get; }
         DbSet<UserEntity> Users { get; }
+        DbSet<LanguageSetting> LanguageSettings { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

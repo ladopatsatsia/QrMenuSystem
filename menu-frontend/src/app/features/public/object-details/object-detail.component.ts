@@ -17,13 +17,13 @@ import { environment } from '../../../../environments/environment';
       
       <div class="header-section mb-5">
         <div class="hero-wrapper rounded-4 shadow-lg overflow-hidden mb-4">
-          <img [src]="getFullUrl(object.imageUrl)" [alt]="object.name" class="hero-image">
+          <img [src]="getFullUrl(object.imageUrl)" [alt]="translateField(object, 'Name')" class="hero-image">
         </div>
         <div class="header-info text-center">
-          <h1 class="display-4 fw-bold mb-3">{{ object.name }}</h1>
-          <p class="lead text-muted mx-auto" style="max-width: 700px;">{{ object.description }}</p>
+          <h1 class="display-4 fw-bold mb-3">{{ translateField(object, 'Name') }}</h1>
+          <p class="lead text-muted mx-auto" style="max-width: 700px;">{{ translateField(object, 'Description') }}</p>
           <div class="meta text-muted d-flex justify-content-center gap-3">
-            <span *ngIf="object.address"><i class="bi bi-geo-alt me-1"></i>{{ object.address }}</span>
+            <span *ngIf="object.address"><i class="bi bi-geo-alt me-1"></i>{{ translateField(object, 'Address') }}</span>
             <span *ngIf="object.phone"><i class="bi bi-telephone me-1"></i>{{ object.phone }}</span>
           </div>
         </div>
@@ -38,7 +38,7 @@ import { environment } from '../../../../environments/environment';
                     [class.btn-primary]="selectedMenu?.id === menu.id"
                     [class.btn-outline-secondary]="selectedMenu?.id !== menu.id"
                     (click)="selectMenu(menu)">
-              {{ menu.name }}
+              {{ translateField(menu, 'Name') }}
             </button>
           </div>
         </div>
@@ -46,12 +46,12 @@ import { environment } from '../../../../environments/environment';
         <div class="items-grid" *ngIf="items.length > 0; else noItems">
           <div class="item-card glass-card p-3 rounded-4" *ngFor="let item of items">
             <div class="d-flex justify-content-between align-items-center mb-2">
-              <h4 class="mb-0 fw-bold">{{ item.name }}</h4>
+              <h4 class="mb-0 fw-bold">{{ translateField(item, 'Name') }}</h4>
               <span class="badge bg-primary rounded-pill px-3">{{ item.price | currency }}</span>
             </div>
             <div class="d-flex gap-3">
               <div class="flex-grow-1">
-                <p class="text-muted small mb-0">{{ item.description }}</p>
+                <p class="text-muted small mb-0">{{ translateField(item, 'Description') }}</p>
               </div>
               <div class="flex-shrink-0" *ngIf="item.imageUrl">
                 <img [src]="getFullUrl(item.imageUrl)" class="item-thumb rounded-3 shadow-sm">
@@ -122,6 +122,10 @@ export class ObjectDetailComponent implements OnInit {
 
   translate(key: string): string {
     return this.translationService.translate(key);
+  }
+
+  translateField(item: any, fieldBaseName: string): string {
+    return this.translationService.translateField(item, fieldBaseName);
   }
 
   getFullUrl(url: string): string {

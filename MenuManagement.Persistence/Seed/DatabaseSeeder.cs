@@ -82,6 +82,15 @@ namespace MenuManagement.Persistence.Seed
                 context.MenuItems.AddRange(item1, item2);
             }
 
+            if (!context.LanguageSettings.Any())
+            {
+                context.LanguageSettings.AddRange(
+                    new LanguageSetting { Code = "ka", Name = "Georgian", IsActive = true },
+                    new LanguageSetting { Code = "en", Name = "English", IsActive = true },
+                    new LanguageSetting { Code = "ru", Name = "Russian", IsActive = true }
+                );
+            }
+
             await context.SaveChangesAsync();
         }
     }

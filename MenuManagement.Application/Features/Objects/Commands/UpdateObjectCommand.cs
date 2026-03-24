@@ -12,9 +12,15 @@ namespace MenuManagement.Application.Features.Objects.Commands
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string? NameEn { get; set; }
+        public string? NameRu { get; set; }
         public string? Description { get; set; }
+        public string? DescriptionEn { get; set; }
+        public string? DescriptionRu { get; set; }
         public string? ImageUrl { get; set; }
         public string? Address { get; set; }
+        public string? AddressEn { get; set; }
+        public string? AddressRu { get; set; }
         public string? Phone { get; set; }
         public bool IsActive { get; set; }
     }
@@ -38,9 +44,15 @@ namespace MenuManagement.Application.Features.Objects.Commands
             }
 
             entity.Name = request.Name;
+            entity.NameEn = request.NameEn;
+            entity.NameRu = request.NameRu;
             entity.Description = request.Description;
+            entity.DescriptionEn = request.DescriptionEn;
+            entity.DescriptionRu = request.DescriptionRu;
             entity.ImageUrl = request.ImageUrl;
             entity.Address = request.Address;
+            entity.AddressEn = request.AddressEn;
+            entity.AddressRu = request.AddressRu;
             entity.Phone = request.Phone;
             entity.IsActive = request.IsActive;
 
