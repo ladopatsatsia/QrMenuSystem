@@ -24,4 +24,5 @@ RUN mkdir -p /app/wwwroot/uploads && chmod -R 777 /app/wwwroot/uploads
 
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://*:8080
+ENV ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
 ENTRYPOINT ["dotnet", "MenuManagement.API.dll"]

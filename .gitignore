@@ -32,3 +32,4 @@ menu-frontend/dist/
 .DS_Store
 Thumbs.db
 artifacts/
+MenuManagement.API/wwwroot/uploads/

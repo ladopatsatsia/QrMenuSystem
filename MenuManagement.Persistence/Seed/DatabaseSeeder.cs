@@ -1,6 +1,4 @@
 using MenuManagement.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,26 +6,33 @@ namespace MenuManagement.Persistence.Seed
 {
     public static class DatabaseSeeder
     {
-        public static async Task SeedAsync(MenuManagementDbContext context)
+        public static async Task SeedAsync(MenuManagementDbContext context, bool includeSampleData = true)
         {
             if (!context.Users.Any())
             {
                 var admin = new UserEntity
                 {
                     Username = "admin",
-                    PasswordHash = "admin123", // For demo
+                    PasswordHash = "admin123",
                     Role = "Admin"
                 };
+
                 context.Users.Add(admin);
             }
 
-            if (!context.Objects.Any())
+            if (includeSampleData && !context.Objects.Any())
             {
                 var obj1 = new ObjectEntity
                 {
                     Name = "Sample Restaurant 1",
+                    NameEn = "Sample Restaurant 1",
+                    NameRu = "Пример ресторана 1",
                     Description = "Modern Italian Cuisine",
+                    DescriptionEn = "Modern Italian cuisine",
+                    DescriptionRu = "Современная итальянская кухня",
                     Address = "123 Pasta St",
+                    AddressEn = "123 Pasta St",
+                    AddressRu = "123 Pasta St",
                     Phone = "555-0101",
                     ImageUrl = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
                 };
@@ -35,8 +40,14 @@ namespace MenuManagement.Persistence.Seed
                 var obj2 = new ObjectEntity
                 {
                     Name = "Sample Cafe 2",
+                    NameEn = "Sample Cafe 2",
+                    NameRu = "Пример кафе 2",
                     Description = "Artisan Coffee & Bakery",
+                    DescriptionEn = "Artisan coffee and bakery",
+                    DescriptionRu = "Авторский кофе и выпечка",
                     Address = "456 Bean Blvd",
+                    AddressEn = "456 Bean Blvd",
+                    AddressRu = "456 Bean Blvd",
                     Phone = "555-0202",
                     ImageUrl = "https://images.unsplash.com/photo-1554118811-1e0d58224f24"
                 };
@@ -47,7 +58,11 @@ namespace MenuManagement.Persistence.Seed
                 {
                     ObjectId = obj1.Id,
                     Name = "Lunch Menu",
+                    NameEn = "Lunch Menu",
+                    NameRu = "Обеденное меню",
                     Description = "Available 11 AM - 4 PM",
+                    DescriptionEn = "Available 11 AM - 4 PM",
+                    DescriptionRu = "Доступно с 11:00 до 16:00",
                     SortOrder = 1
                 };
 
@@ -55,7 +70,11 @@ namespace MenuManagement.Persistence.Seed
                 {
                     ObjectId = obj1.Id,
                     Name = "Dinner Menu",
+                    NameEn = "Dinner Menu",
+                    NameRu = "Ужинное меню",
                     Description = "Available 5 PM - 10 PM",
+                    DescriptionEn = "Available 5 PM - 10 PM",
+                    DescriptionRu = "Доступно с 17:00 до 22:00",
                     SortOrder = 2
                 };
 
@@ -65,7 +84,11 @@ namespace MenuManagement.Persistence.Seed
                 {
                     MenuId = menu1.Id,
                     Name = "Carbonara",
+                    NameEn = "Carbonara",
+                    NameRu = "Карбонара",
                     Description = "Classic pasta with egg, cheese, and guanciale",
+                    DescriptionEn = "Classic pasta with egg, cheese, and guanciale",
+                    DescriptionRu = "Классическая паста с яйцом, сыром и гуанчале",
                     Price = 14.99m,
                     SortOrder = 1
                 };
@@ -74,7 +97,11 @@ namespace MenuManagement.Persistence.Seed
                 {
                     MenuId = menu1.Id,
                     Name = "Margherita Pizza",
+                    NameEn = "Margherita Pizza",
+                    NameRu = "Пицца Маргарита",
                     Description = "Tomato, mozzarella, and basil",
+                    DescriptionEn = "Tomato, mozzarella, and basil",
+                    DescriptionRu = "Томат, моцарелла и базилик",
                     Price = 12.99m,
                     SortOrder = 2
                 };

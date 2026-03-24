@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Location } from '@angular/common';
 import { ApiService } from '../../../core/services/api.service';
-import { ImageService } from '../../../core/services/image.service';
 import { TranslationService } from '../../../core/services/translation.service';
 import { environment } from '../../../../environments/environment';
 import { timeout } from 'rxjs';
@@ -360,7 +359,7 @@ export class MenuItemManagementComponent implements OnInit {
   isUploading = false;
   activeLang: 'ka' | 'en' | 'ru' = 'ka';
 
-  constructor(private api: ApiService, private route: ActivatedRoute, private imageService: ImageService, private translationService: TranslationService, private location: Location) {}
+  constructor(private api: ApiService, private route: ActivatedRoute, private translationService: TranslationService, private location: Location) {}
 
   ngOnInit() {
     this.menuId = this.route.snapshot.paramMap.get('menuId');
@@ -426,18 +425,9 @@ export class MenuItemManagementComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.isUploading = true;
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Process timed out')), 30000)
-      );
-
       try {
-        const resizedBlob = (await Promise.race([
-          this.imageService.resizeImage(file),
-          timeoutPromise
-        ])) as Blob;
-
         const formData = new FormData();
-        formData.append('file', resizedBlob, file.name);
+        formData.append('file', file, file.name);
         
         this.api.post('/admin/upload/image', formData).pipe(
           timeout(30000)

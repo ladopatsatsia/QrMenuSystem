@@ -9,10 +9,13 @@ using System.Text;
 using MenuManagement.Persistence.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
-
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
 
 // Configure Kestrel limits
 builder.Services.Configure<KestrelServerOptions>(options =>
@@ -83,20 +86,34 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
-        builder => builder.AllowAnyOrigin()
-                          .AllowAnyMethod()
-                          .AllowAnyHeader());
+    options.AddPolicy("AppCorsPolicy", policy =>
+    {
+        if (allowedOrigins is { Length: > 0 })
+        {
+            policy.WithOrigins(allowedOrigins)
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        }
+        else
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        }
+    });
 });
 
 var app = builder.Build();
-using (var scope = app.Services.CreateScope())
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
-    var db = scope.ServiceProvider.GetRequiredService<MenuManagementDbContext>();
-    db.Database.Migrate();
-}
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI(c => {
@@ -118,32 +135,23 @@ app.UseStaticFiles(new StaticFileOptions
 
 app.UseHttpsRedirection();
 
-app.UseCors("AllowAll");
+app.UseCors("AppCorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
 app.MapControllers();
-app.MapFallbackToFile("index.html");
 
-// Seed Database
+// Apply migrations and seed startup data.
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<MenuManagementDbContext>();
     try
     {
-        if (context.Database.ProviderName == "Npgsql.EntityFrameworkCore.PostgreSQL")
-        {
-            // For Postgres (Render), EnsureCreated only works if the DB is totally empty.
-            // If it fails or does nothing, we try to apply migrations.
-            await context.Database.EnsureCreatedAsync();
-        }
-        else
-        {
-            await context.Database.MigrateAsync();
-        }
-        await DatabaseSeeder.SeedAsync(context);
+        await context.Database.MigrateAsync();
+        await DatabaseSeeder.SeedAsync(context, includeSampleData: !app.Environment.IsProduction());
     }
     catch (Exception ex)
     {
@@ -153,4 +161,3 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
-
