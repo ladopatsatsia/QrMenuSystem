@@ -11,9 +11,9 @@ namespace MenuManagement.Persistence
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             var rawConnection =
+                Environment.GetEnvironmentVariable("DATABASE_URL") ??
                 configuration.GetConnectionString("PostgresConnection") ??
-                configuration.GetConnectionString("DefaultConnection") ??
-                Environment.GetEnvironmentVariable("DATABASE_URL");
+                configuration.GetConnectionString("DefaultConnection");
 
             var connectionString = BuildPostgresConnectionString(rawConnection);
 
