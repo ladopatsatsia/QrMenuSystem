@@ -87,28 +87,34 @@ builder.Services.AddAuthentication(options =>
 });
 
 var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
+var configuredOrigins = allowedOrigins ?? Array.Empty<string>();
+
+bool IsAllowedOrigin(string? origin)
+{
+    if (string.IsNullOrWhiteSpace(origin))
+    {
+        return false;
+    }
+
+    if (configuredOrigins.Contains(origin, StringComparer.OrdinalIgnoreCase))
+    {
+        return true;
+    }
+
+    if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri))
+    {
+        return false;
+    }
+
+    return uri.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase)
+        || uri.Host.EndsWith(".onrender.com", StringComparison.OrdinalIgnoreCase);
+}
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AppCorsPolicy", policy =>
     {
-        var configuredOrigins = allowedOrigins ?? Array.Empty<string>();
-
-        policy.SetIsOriginAllowed(origin =>
-              {
-                  if (configuredOrigins.Contains(origin, StringComparer.OrdinalIgnoreCase))
-                  {
-                      return true;
-                  }
-
-                  if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri))
-                  {
-                      return false;
-                  }
-
-                  return uri.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase)
-                      || uri.Host.EndsWith(".onrender.com", StringComparison.OrdinalIgnoreCase);
-              })
+        policy.SetIsOriginAllowed(origin => IsAllowedOrigin(origin))
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
@@ -141,6 +147,32 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseHttpsRedirection();
+
+app.Use(async (context, next) =>
+{
+    var origin = context.Request.Headers.Origin.ToString();
+
+    if (IsAllowedOrigin(origin))
+    {
+        context.Response.Headers["Access-Control-Allow-Origin"] = origin;
+        context.Response.Headers["Vary"] = "Origin";
+        context.Response.Headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS";
+
+        var requestedHeaders = context.Request.Headers["Access-Control-Request-Headers"].ToString();
+        context.Response.Headers["Access-Control-Allow-Headers"] =
+            string.IsNullOrWhiteSpace(requestedHeaders)
+                ? "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+                : requestedHeaders;
+    }
+
+    if (HttpMethods.IsOptions(context.Request.Method))
+    {
+        context.Response.StatusCode = StatusCodes.Status204NoContent;
+        return;
+    }
+
+    await next();
+});
 
 app.UseCors("AppCorsPolicy");
 
