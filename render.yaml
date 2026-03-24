@@ -17,7 +17,7 @@ services:
       - key: JwtSettings__Audience
         value: MenuManagementFrontend
       - key: Cors__AllowedOrigins__0
-        value: https://qrmenu-frontend.onrender.com
+        value: https://qrmenu-frontend-6m70.onrender.com
     disk:
       name: uploads-disk
       mountPath: /app/wwwroot/uploads
